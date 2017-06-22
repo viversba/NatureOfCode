@@ -7,13 +7,40 @@ class Attractor{
   public Attractor(){
     location = new PVector(width/2,height/2);
     this.mass = 40;
-    G = 0.2;
+    G = 0.4;
   }
   
   void display(){
     stroke(0);
-    fill(175,200);
-    ellipse(location.x,location.y,mass*2,mass*2);
+    if(mousePressed && isInside(new PVector(mouseX,mouseY))){
+      location.x = mouseX;
+      location.y = mouseY;
+      fill(130,150);
+      ellipse(location.x,location.y,mass*2,mass*2);
+    }
+    else{
+      fill(175,200);
+      ellipse(location.x,location.y,mass*2,mass*2);
+    }
+  }
+  
+  boolean isInRange(Mover m){
+    PVector dir = PVector.sub(location,m.location);
+    //PVector dir = this.location.sub(m.location);
+    float distance = dir.mag();
+    if(distance < mass*40)
+      return true;
+     else
+       return false;
+  }
+  
+  boolean isInside(PVector position){
+    PVector dir = PVector.sub(location,position);
+    float distance = dir.mag();
+    if(distance < mass)
+      return true;
+     else
+       return false;
   }
   
   PVector attract(Mover m){
