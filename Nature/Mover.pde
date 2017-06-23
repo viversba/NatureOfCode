@@ -67,5 +67,32 @@ class Mover{
     applyForce(drag);
   }
   
+  PVector attract(Mover m){
+    PVector force = PVector.sub(location,m.location);
+    float distance = force.mag();
+    distance = constrain(distance,5,25);
+    force.normalize();
+    float strength = (G*mass*m.mass)/(distance*distance);
+    force.mult(strength);
+    return force;
+  }
   
+  PVector repell(Mover m){
+    PVector force = PVector.sub(location,m.location);
+    float distance = force.mag();
+    if(distance >= mass*4){
+      distance = constrain(distance,5,25);
+      force.normalize();
+      float strength = (G*mass*m.mass)/(distance*distance);
+      force.mult(strength);
+      return force;
+    }
+    else{
+      distance = constrain(distance,5,25);
+      force.normalize();
+      float strength = (G*mass*m.mass)/(distance*distance);
+      force.mult(-strength);
+      return force;
+    }
+  }
 }

@@ -9,7 +9,7 @@ class Attractor{
   public Attractor(){
     location = new PVector(random(width),random(height));
     this.mass = 40;
-    G = 0.4;
+    G = 0.1;
     grabbed = false;
     distGrab = new PVector(0,0);
   }
