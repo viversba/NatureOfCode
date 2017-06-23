@@ -1,4 +1,4 @@
-class Attractor{
+class Repellent{
 
   PVector location;
   float mass;
@@ -6,8 +6,16 @@ class Attractor{
   boolean grabbed;
   PVector distGrab;
   
-  public Attractor(){
+  public Repellent(){
     location = new PVector(random(width),random(height));
+    this.mass = 40;
+    G = 0.4;
+    grabbed = false;
+    distGrab = new PVector(0,0);
+  }
+  
+  public Repellent(float x, float y){
+    location = new PVector(x,y);
     this.mass = 40;
     G = 0.4;
     grabbed = false;
@@ -57,13 +65,22 @@ class Attractor{
        return false;
   }
   
-  PVector attract(Mover m){
+  PVector repell(Mover m){
     PVector force = PVector.sub(location,m.location);
     float distance = force.mag();
-    distance = constrain(distance,5,25);
-    force.normalize();
-    float strength = (G*mass*m.mass)/(distance*distance);
-    force.mult(strength);
-    return force;
+    if(distance >= mass*4){
+      distance = constrain(distance,5,25);
+      force.normalize();
+      float strength = (G*mass*m.mass)/(distance*distance);
+      force.mult(strength);
+      return force;
+    }
+    else{
+      distance = constrain(distance,5,25);
+      force.normalize();
+      float strength = (G*mass*m.mass)/(distance*distance);
+      force.mult(-strength);
+      return force;
+    }
   }
 }
