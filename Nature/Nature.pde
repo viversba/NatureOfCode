@@ -1,5 +1,5 @@
 Mover m[];
-Attractor A;
+Attractor A[];
 float G;
  
 void setup() {
@@ -7,17 +7,25 @@ void setup() {
   background(255);
   m = new Mover[10];
   for(int i=0;i<m.length;i++){
-    m[i] = new Mover(random(3),random(width),random(height));
+    m[i] = new Mover(random(0.2),random(width),random(height));
   }
-  A = new Attractor();
+  A = new Attractor[3];
+  for(int i=0;i<A.length;i++){
+    A[i] = new Attractor();
+  }
+  
 }
  
 void draw() {
-  background(255);
-  A.display();
+  //background(255);
+  for(int i=0;i<A.length;i++){
+    A[i].display();
+  }
   for(int i=0;i<m.length;i++){
-    PVector force = A.attract(m[i]);
-    m[i].applyForce(force);
+    for(int j=0;j<A.length;j++){
+      PVector force = A[j].attract(m[i]);
+      m[i].applyForce(force);
+    }
     m[i].update();
     m[i].display();
   }

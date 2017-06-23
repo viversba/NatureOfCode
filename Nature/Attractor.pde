@@ -7,7 +7,7 @@ class Attractor{
   PVector distGrab;
   
   public Attractor(){
-    location = new PVector(width/2,height/2);
+    location = new PVector(random(width),random(height));
     this.mass = 40;
     G = 0.4;
     grabbed = false;
@@ -30,7 +30,7 @@ class Attractor{
       grabbed = true;
       fill(100,250);
     }
-    ellipse(location.x,location.y,mass*2,mass*2);
+    //ellipse(location.x,location.y,mass*2,mass*2);
   }
   
   boolean isInRange(Mover m){
