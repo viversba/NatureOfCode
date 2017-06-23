@@ -5,7 +5,7 @@ float G;
 void setup() {
   size(880,495);
   background(255);
-  m = new Mover[30];
+  m = new Mover[10];
   for(int i=0;i<m.length;i++){
     m[i] = new Mover(random(3),random(width),random(height));
   }
