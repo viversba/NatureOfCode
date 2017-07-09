@@ -1,12 +1,14 @@
-Mover m[];
+/*Mover m[];
 Attractor A[];
-Repellent R[];
+Repellent R[];*/
+Mover m;
 float G;
  
 void setup() {
   size(880,495);
   background(255);
-  m = new Mover[10];
+  m = new Mover(2,random(width),random(height));
+  /*m = new Mover[10];
   for(int i=0;i<m.length;i++){
     m[i] = new Mover(2,random(width),random(height));
   }
@@ -17,12 +19,32 @@ void setup() {
   R = new Repellent[4];
   for(int i=0;i<A.length;i++){
     R[i] = new Repellent();
-  }
+  }*/
 }
  
 void draw() {
   background(255);
+  //m.display();
+  if(keyPressed){
+    if(keyCode == UP){
+      m.applyForce(new PVector(0,-1));
+      //print("TRUE");
+    }
+    if(keyCode == DOWN){
+      m.applyForce(new PVector(0,1));
+    }
+    if(keyCode == RIGHT){
+      m.applyForce(new PVector(1,0));
+    }
+    if(keyCode == LEFT){
+      m.applyForce(new PVector(-1,0));
+    }
+  }
+  m.update();
+  m.checkEdges();
+  m.display();
   //pushMatrix();
+  /*
   for(int i=0;i<A.length;i++){
     A[i].display();
   }
@@ -39,6 +61,6 @@ void draw() {
     }
     m[i].update();
     m[i].display();
-  }
+  }*/
 }
  

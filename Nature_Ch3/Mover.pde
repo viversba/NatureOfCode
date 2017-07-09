@@ -22,7 +22,7 @@ class Mover{
   }
  
   void update() {
- 
+    angle = velocity.heading();
     velocity.add(acceleration);
     location.add(velocity);
     
@@ -41,7 +41,7 @@ class Mover{
     pushMatrix();
     translate(location.x,location.y);
     rotate(angle);
-    rect(0,0,mass*16,mass*16);
+    rect(0,0,mass*16,mass*4);
     popMatrix();
   }
  
@@ -54,9 +54,11 @@ class Mover{
       location.x = 0;
       velocity.x = -velocity.x;
     }
- 
     if (location.y > height) {
       location.y = height;
+      velocity.y = -velocity.y;
+    }else if (location.y < 0) {
+      location.y = 0;
       velocity.y = -velocity.y;
     }
   }
