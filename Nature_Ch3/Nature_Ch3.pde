@@ -2,12 +2,13 @@
 Attractor A[];
 Repellent R[];*/
 Mover m;
+float r = 0;
+float theta = 0;
 float G;
  
 void setup() {
   size(880,495);
   background(255);
-  m = new Mover(2,random(width),random(height));
   /*m = new Mover[10];
   for(int i=0;i<m.length;i++){
     m[i] = new Mover(2,random(width),random(height));
@@ -23,26 +24,16 @@ void setup() {
 }
  
 void draw() {
-  background(255);
+  //background(255);
+  float x = r * cos(theta);
+  float y = r * sin(theta);
+  //noStroke();
+  fill(0);
+  //line(width/2,height/2,x + width/2,y+height/2);
+  ellipse(x+width/2, y+height/2, 16, 16);
+  theta += 0.01;
+  r += 0.05;
   //m.display();
-  if(keyPressed){
-    if(keyCode == UP){
-      m.applyForce(new PVector(0,-1));
-      //print("TRUE");
-    }
-    if(keyCode == DOWN){
-      m.applyForce(new PVector(0,1));
-    }
-    if(keyCode == RIGHT){
-      m.applyForce(new PVector(1,0));
-    }
-    if(keyCode == LEFT){
-      m.applyForce(new PVector(-1,0));
-    }
-  }
-  m.update();
-  m.checkEdges();
-  m.display();
   //pushMatrix();
   /*
   for(int i=0;i<A.length;i++){
