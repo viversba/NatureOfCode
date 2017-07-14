@@ -30,13 +30,13 @@ class Ship{
     acceleration.mult(0);
     if(keyPressed){  
       if(keyCode == LEFT){
-        angle -= 0.09;
+        angle -= 0.04;
       }
       if(keyCode == RIGHT){
-        angle += 0.09;
+        angle += 0.04;
       }
       if(key=='z'){
-        applyForce(new PVector(-4*cos(angle+radians(90)),-4*sin(angle+radians(90))));
+        applyForce(new PVector(-0.7*cos(angle+radians(90)),-0.7*sin(angle+radians(90))));
       }
     }
   }
@@ -48,6 +48,11 @@ class Ship{
     stroke(5);
     triangle(0,-15,-12,15,12,15);
     fill(80,20,100);
+    if(keyPressed){
+      if(key == 'z'){
+        fill(220,20,20);
+      }
+    }
     rect(-8,19,6,6);
     rect(7,19,6,6);
   }
